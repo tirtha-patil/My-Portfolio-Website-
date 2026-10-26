@@ -1,0 +1,206 @@
+/* =========================================
+   Tirtha Patil - Portfolio
+   Global Styles
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.15), transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(192, 38, 211, 0.12), transparent 35%),
+        #090612;
+    color: #f8f7ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow-x: hidden;
+}
+
+/* =========================================
+   Main Container
+========================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* =========================================
+   Hero / Coming Soon Section
+========================================= */
+
+body {
+    position: relative;
+}
+
+h1 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+
+    background: linear-gradient(
+        135deg,
+        #ffffff 20%,
+        #d8b4fe 50%,
+        #8b5cf6 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    margin-bottom: 1.5rem;
+}
+
+p {
+    color: #b8aec9;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* =========================================
+   Content Wrapper
+========================================= */
+
+body > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* If your HTML has a main/container */
+main,
+.container,
+section {
+    width: min(1100px, 90%);
+    margin: auto;
+}
+
+/* =========================================
+   Links
+========================================= */
+
+a {
+    color: #c4b5fd;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #ffffff;
+}
+
+/* =========================================
+   Buttons
+========================================= */
+
+button {
+    border: none;
+    cursor: pointer;
+    font: inherit;
+}
+
+button,
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+
+    background: linear-gradient(
+        135deg,
+        #7c3aed,
+        #a855f7
+    );
+
+    color: white;
+
+    box-shadow:
+        0 10px 30px rgba(124, 58, 237, 0.25);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 40px rgba(139, 92, 246, 0.4);
+
+    filter: brightness(1.1);
+}
+
+/* =========================================
+   Selection
+========================================= */
+
+::selection {
+    background: #8b5cf6;
+    color: white;
+}
+
+/* =========================================
+   Scrollbar
+========================================= */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #090612;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+        #7c3aed,
+        #c026d3
+    );
+
+    border-radius: 999px;
+}
+
+/* =========================================
+   Responsive
+========================================= */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 2rem 1rem;
+    }
+
+    h1 {
+        font-size: clamp(2.8rem, 15vw, 5rem);
+    }
+
+    p {
+        font-size: 1rem;
+    }
+}
