@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tirtha Patil | Machine Learning • Computer Vision • Explainable AI</title>
+  
+  <!-- SEO & Social Metadata -->
+  <meta name="description" content="Portfolio of Tirtha Patil, a Computer Science & Artificial Intelligence student focused on Machine Learning, Computer Vision, and Explainable AI.">
+  <meta name="keywords" content="Tirtha Patil, Machine Learning, Computer Vision, Explainable AI, Grad-CAM, Deep Learning, Healthcare AI, Research Internship, Vishwakarma Institute of Technology">
+  <meta name="author" content="Tirtha Patil">
+  <meta name="theme-color" content="#090612">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tirtha-patil.github.io/My-Portfolio-Website-/">
+  <meta property="og:title" content="Tirtha Patil | Machine Learning • Computer Vision • Explainable AI">
+  <meta property="og:description" content="AI/ML student researcher specializing in Computer Vision, Medical Imaging, and Explainable AI. Explore selected research projects, publications, and technical toolkit.">
+  <meta property="og:image" content="assets/images/retina-gradcam.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Tirtha Patil | Machine Learning • Computer Vision • Explainable AI">
+  <meta property="twitter:description" content="AI/ML student researcher specializing in Computer Vision, Medical Imaging, and Explainable AI.">
+  <meta property="twitter:image" content="assets/images/retina-gradcam.jpg">
+
+  <!-- Favicon (Futuristic Violet AI Glyph) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%236D28D9'/><path d='M10 11h12M16 11v11M12 22h8' stroke='%23D8B4FE' stroke-width='2.5' stroke-linecap='round'/></svg>">
+
+  <!-- Modern Google Fonts: Inter, Space Grotesk, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Ambient Interactive Particle / Orbital Canvas -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- ========================================================================
+       Header & Sticky / Floating Navbar
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="nav-pill-container">
+      <!-- Brand Logo -->
+      <a href="#hero" class="brand-logo" aria-label="Tirtha Patil Home">
+        <div class="brand-glyph">TP</div>
+        <div class="brand-name">
+          <span class="brand-name-main">Tirtha Patil</span>
+          <span class="brand-name-sub">AI Research Lab</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <a href="#hero" class="nav-link active">About</a>
+        <a href="#research" class="nav-link">Research</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#certifications" class="nav-link">Certifications</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Nav Actions (Sound Toggle & Resume) -->
+      <div class="nav-actions">
+        <!-- Sound Effect Toggle -->
+        <button id="sound-toggle" class="sound-toggle-btn" aria-label="Toggle subtle UI sound effects" title="Toggle audio feedback">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+
+        <!-- View Resume Button -->
+        <button class="btn btn-primary btn-sm view-resume-trigger" id="navbar-resume-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          View Resume
+        </button>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="mobile-toggle-btn" id="mobile-toggle" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Dropdown Navigation Drawer -->
+  <div class="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation">
+    <a href="#hero" class="nav-link">About</a>
+    <a href="#research" class="nav-link">Research Interests</a>
+    <a href="#projects" class="nav-link">Selected Work</a>
+    <a href="#skills" class="nav-link">Technical Skills</a>
+    <a href="#certifications" class="nav-link">Certifications</a>
+    <a href="#experience" class="nav-link">Experience & Education</a>
+    <a href="#activities" class="nav-link">Beyond the Lab</a>
+    <a href="#contact" class="nav-link">Connect</a>
+    <div style="padding-top: 10px; border-top: 1px solid var(--border-subtle); display: flex; gap: 10px;">
+      <button class="btn btn-primary view-resume-trigger" style="width: 100%;">
+        View Resume PDF
+      </button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ======================================================================
+         Hero Section
+         ====================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <!-- Lab Status Badge -->
+            <div class="lab-badge">
+              <span class="pulse-indicator"></span>
+              <span>AI Research Laboratory • Open for Research Internships</span>
+            </div>
+
+            <!-- Headlines -->
+            <h1 class="hero-headline">
+              Hi, I'm <span class="gradient-text">Tirtha.</span>
+            </h1>
+
+            <div class="hero-subheadline">
+              <span>Machine Learning</span>
+              <span class="dot">•</span>
+              <span>Computer Vision</span>
+              <span class="dot">•</span>
+              <span>Explainable AI</span>
+            </div>
+
+            <!-- Introduction -->
+            <p class="hero-bio">
+              I’m a Computer Science & Engineering student focused on building intelligent systems and exploring research at the intersection of machine learning, computer vision, and explainable AI.
+            </p>
+
+            <!-- Secondary Exploration Status Line -->
+            <div class="hero-status-line">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span>Currently exploring • ML Research • Computer Vision • Explainable AI</span>
+            </div>
+
+            <!-- CTAs -->
+            <div class="hero-ctas">
+              <a href="#projects" class="btn btn-primary">
+                Explore My Work
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <button class="btn btn-secondary view-resume-trigger">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                View Resume
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero Futuristic Holographic Lab Terminal -->
+          <div class="hero-visual">
+            <div class="holo-card-wrapper">
+              <div class="holo-blob-1"></div>
+              <div class="holo-blob-2"></div>
+
+              <div class="holo-header">
+                <div class="terminal-dots">
+                  <span class="terminal-dot"></span>
+                  <span class="terminal-dot"></span>
+                  <span class="terminal-dot"></span>
+                </div>
+                <span>xai-research-cluster.vit</span>
+                <span>STATUS: ACTIVE</span>
+              </div>
+
+              <!-- Interactive Neural Core -->
+              <div class="neural-core">
+                <div class="orbital-ring orbital-ring-1"></div>
+                <div class="orbital-ring orbital-ring-2"></div>
+                <div class="core-nucleus">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                </div>
+              </div>
+
+              <!-- Live Meta Indicators -->
+              <div class="holo-meta-list">
+                <div class="holo-meta-row">
+                  <span class="label">PRIMARY FOCUS:</span>
+                  <span class="val">Computer Vision &amp; XAI</span>
+                </div>
+                <div class="holo-meta-row">
+                  <span class="label">SPECIALIZATION:</span>
+                  <span class="val">B.Tech CSE (AIML) '28</span>
+                </div>
+                <div class="holo-meta-row">
+                  <span class="label">INTERPRETABILITY:</span>
+                  <span class="val">Grad-CAM • SHAP</span>
+                </div>
+                <div class="holo-meta-row">
+                  <span class="label">INSTITUTION:</span>
+                  <span class="val">VIT Pune</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Research Interests Section
+         ====================================================================== -->
+    <section id="research">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Scientific Domains</span>
+          <h2 class="section-title">Research Interests</h2>
+          <p class="section-subtitle">
+            Exploring foundational and applied machine learning challenges with a particular focus on transparent decision-making, medical computer vision, and verifiable diagnostic algorithms.
+          </p>
+        </div>
+
+        <div class="research-grid" id="research-grid">
+          <!-- Dynamically populated from portfolio-data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Selected Projects Section
+         ====================================================================== -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Empirical Systems</span>
+          <h2 class="section-title">Selected Work</h2>
+          <p class="section-subtitle">
+            AI/ML projects exploring intelligent systems, healthcare AI, explainability, and real-time applications.
+          </p>
+        </div>
+
+        <!-- Prominent Featured Project (Retina Disease Detection CNN & Grad-CAM) -->
+        <div class="featured-project-container" id="featured-project-container">
+          <!-- Dynamically populated from portfolio-data.js -->
+        </div>
+
+        <!-- Remaining Projects Grid -->
+        <div class="projects-grid" id="projects-grid">
+          <!-- Dynamically populated from portfolio-data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Technical Skills / Research Toolkit Section
+         ====================================================================== -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Technical Competencies</span>
+          <h2 class="section-title">Skills &amp; Research Toolkit</h2>
+          <p class="section-subtitle">
+            Disciplined software engineering and scientific frameworks used for modeling, exploratory data analysis, and high-performance server runtimes.
+          </p>
+        </div>
+
+        <div class="skills-grid" id="skills-grid">
+          <!-- Dynamically populated from portfolio-data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Certifications Section
+         ====================================================================== -->
+    <section id="certifications">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Verified Credentials</span>
+          <h2 class="section-title">Certifications</h2>
+          <p class="section-subtitle">
+            Academic programs, enterprise virtual simulations, and technical proficiencies verified through certified credential authorities.
+          </p>
+        </div>
+
+        <div class="certs-grid" id="certs-grid">
+          <!-- Dynamically populated from portfolio-data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Experience & Education Section (Dual Layout)
+         ====================================================================== -->
+    <section id="experience">
+      <div class="container">
+        <div class="exp-edu-grid">
+          <!-- Experience Column -->
+          <div>
+            <div class="section-header" style="margin-bottom: 36px;">
+              <span class="section-tag">Industry Training</span>
+              <h2 class="section-title">Experience</h2>
+              <p class="section-subtitle">
+                Applied engineering and collaborative software delivery.
+              </p>
+            </div>
+
+            <div class="timeline" id="experience-timeline">
+              <!-- Dynamically populated from portfolio-data.js -->
+            </div>
+          </div>
+
+          <!-- Education Column -->
+          <div>
+            <div class="section-header" style="margin-bottom: 36px;">
+              <span class="section-tag">Formal Curriculum</span>
+              <h2 class="section-title">Education</h2>
+              <p class="section-subtitle">
+                Academic foundation in computer science and mathematical principles.
+              </p>
+            </div>
+
+            <div id="education-container">
+              <!-- Dynamically populated from portfolio-data.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Leadership & Activities ("Beyond the Lab")
+         ====================================================================== -->
+    <section id="activities">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Community &amp; Leadership</span>
+          <h2 class="section-title">Beyond the Lab</h2>
+          <p class="section-subtitle">
+            Student leadership, creative multimedia coordination, and campus community engagement.
+          </p>
+        </div>
+
+        <div class="leadership-grid" id="leadership-grid">
+          <!-- Dynamically populated from portfolio-data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         Let's Connect Section & Functional Contact Form
+         ====================================================================== -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Contact Direct Channels -->
+          <div class="contact-info-card">
+            <div>
+              <span class="section-tag">Direct Transmission</span>
+              <h2 class="contact-headline" style="margin-top: 8px;">
+                Have a research opportunity in mind?
+              </h2>
+              <p class="contact-lead" style="margin-top: 14px;">
+                I am actively seeking AI/ML research internships, graduate school research collaborations, and engineering roles at the intersection of computer vision and interpretable models.
+              </p>
+            </div>
+
+            <!-- Channel List -->
+            <div class="contact-channel-list" id="contact-channels">
+              <!-- Dynamically populated from portfolio-data.js -->
+            </div>
+
+            <div>
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Direct Social Links</span>
+              <div class="social-buttons-row">
+                <a href="https://github.com/tirtha-patil" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Tirtha Patil on GitHub">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/tirtha-patil/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Tirtha Patil on LinkedIn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <a href="mailto:tirtha.patil24@vit.edu" class="social-btn" aria-label="Email Tirtha Patil">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Functional Contact Form -->
+          <div class="contact-form-card">
+            <h3 style="font-size: 1.3rem; margin-bottom: 6px;">Send a Direct Message</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 22px;">
+              Whether inquiring about research assistantships, code collaboration, or project inquiries, feel free to reach out.
+            </p>
+
+            <form id="contact-form" class="contact-form" novalidate>
+              <!-- Spam Honeypot Field -->
+              <input type="text" name="_honey" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+              <div class="form-group">
+                <label for="sender-name" class="form-label">
+                  <span>Your Name</span>
+                  <span style="color: var(--color-magenta);">*</span>
+                </label>
+                <input type="text" id="sender-name" name="name" class="form-input" placeholder="e.g. Dr. Alex Mercer / Sarah Chen" required>
+              </div>
+
+              <div class="form-group">
+                <label for="sender-email" class="form-label">
+                  <span>Your Email Address</span>
+                  <span style="color: var(--color-magenta);">*</span>
+                </label>
+                <input type="email" id="sender-email" name="email" class="form-input" placeholder="e.g. alex.mercer@university.edu" required>
+              </div>
+
+              <div class="form-group">
+                <label for="sender-subject" class="form-label">
+                  <span>Subject / Inquiry Nature</span>
+                  <span style="color: var(--color-magenta);">*</span>
+                </label>
+                <input type="text" id="sender-subject" name="subject" class="form-input" placeholder="e.g. Research Internship Inquiry / Project Discussion" required>
+              </div>
+
+              <div class="form-group">
+                <label for="sender-message" class="form-label">
+                  <span>Message</span>
+                  <span style="color: var(--color-magenta);">*</span>
+                </label>
+                <textarea id="sender-message" name="message" class="form-textarea" placeholder="Detail your project or opportunity here..." required></textarea>
+              </div>
+
+              <!-- Live Submission Feedback Box -->
+              <div id="form-feedback" class="form-feedback" role="alert"></div>
+
+              <button type="submit" id="form-submit-btn" class="btn btn-primary" style="width: 100%; padding: 13px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       Cute Minimal Futuristic Robot Companion
+       ======================================================================== -->
+  <aside class="robot-companion-container" id="robot-companion" aria-label="Tirtha's AI lab companion bot">
+    <div class="robot-speech-bubble" id="robot-speech">
+      Hi, Tirtha here! 👋
+    </div>
+    <div class="robot-avatar" role="button" tabindex="0" aria-label="Interactive lab robot. Click for a greeting.">
+      <!-- Minimalist Futuristic Lavender/Violet Robot SVG -->
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Antenna -->
+        <line x1="18" y1="4" x2="18" y2="8" stroke="#D8B4FE" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="18" cy="3" r="2" fill="#C026D3"/>
+        <!-- Robot Head -->
+        <rect x="7" y="8" width="22" height="18" rx="6" fill="#241044" stroke="#8B5CF6" stroke-width="1.8"/>
+        <!-- Visor Face Screen -->
+        <rect x="10" y="12" width="16" height="9" rx="3.5" fill="#10091F"/>
+        <!-- Glowing Cyan/Lavender Visor Eyes -->
+        <ellipse cx="14" cy="16.5" rx="2" ry="2.2" fill="#D8B4FE"/>
+        <ellipse cx="22" cy="16.5" rx="2" ry="2.2" fill="#D8B4FE"/>
+        <!-- Subtle Smile -->
+        <path d="M16 19q2 1.5 4 0" stroke="#38BDF8" stroke-width="1.2" stroke-linecap="round"/>
+        <!-- Ears / Nodes -->
+        <rect x="4" y="14" width="3" height="6" rx="1.5" fill="#6D28D9"/>
+        <rect x="29" y="14" width="3" height="6" rx="1.5" fill="#6D28D9"/>
+      </svg>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Modal: Resume Viewer
+       ======================================================================== -->
+  <div class="modal-backdrop" id="resume-modal" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          <h3 class="modal-title" id="resume-modal-title">Curriculum Vitae — Tirtha Patil</h3>
+        </div>
+        <div class="modal-actions">
+          <a href="assets/resume.pdf" download="Tirtha_Patil_Resume.pdf" class="btn btn-primary btn-sm" id="resume-download-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download PDF
+          </a>
+          <a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" title="Open in new window">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+          <button class="modal-close-btn" aria-label="Close modal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe id="resume-iframe" src="about:blank" title="Tirtha Patil Resume PDF Viewer"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Modal: Certificate Viewer
+       ======================================================================== -->
+  <div class="modal-backdrop" id="cert-modal" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+          <h3 class="modal-title" id="cert-modal-title">Credential Verification</h3>
+        </div>
+        <div class="modal-actions">
+          <a href="#" download id="cert-download-btn" class="btn btn-primary btn-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" id="cert-newtab-btn" class="btn btn-secondary btn-sm" title="Open PDF in new tab">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+          <button class="modal-close-btn" aria-label="Close certificate modal">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe id="cert-iframe" src="about:blank" title="Certificate Document Viewer"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Minimal Editorial Footer
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div style="font-weight: 600; color: var(--text-primary);">
+            © 2026 Tirtha Patil • Machine Learning • Computer Vision • Explainable AI
+          </div>
+          <div class="footer-quote">
+            "Built with curiosity and a questionable number of experiments."
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <a href="https://github.com/tirtha-patil" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary);">GitHub</a>
+          <a href="https://www.linkedin.com/in/tirtha-patil/" target="_blank" rel="noopener noreferrer" style="color: var(--text-secondary);">LinkedIn</a>
+          <a href="mailto:tirtha.patil24@vit.edu" style="color: var(--text-secondary);">Email</a>
+          <button class="view-resume-trigger" style="background: none; border: none; color: var(--color-lavender); cursor: pointer; font-size: 0.88rem; font-family: inherit;">Resume</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/portfolio-data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/canvas.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
