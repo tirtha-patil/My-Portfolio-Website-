@@ -76,103 +76,38 @@ const PORTFOLIO_DATA = {
   projects: [
     {
       id: "retina-disease-detection",
-      featured: true,
-      title: "AI-Powered Retina Disease Detection using CNN & Grad-CAM",
-      category: "Computer Vision / Explainable AI / Healthcare AI",
-      shortDescription: "A deep learning diagnostic pipeline achieving ~87% classification accuracy on retinal fundus scans, paired with Grad-CAM explainability to visualize model attention regions.",
-      longDescription: "Built an end-to-end medical computer vision system utilizing transfer learning with MobileNetV2. Integrated Gradient-weighted Class Activation Mapping (Grad-CAM) to generate heatmaps highlighting clinically significant retinal lesions, ensuring predictions can be audited by healthcare specialists.",
-      image: "assets/images/retina-gradcam.jpg",
-      technologies: ["Python", "TensorFlow / Keras", "MobileNetV2", "CNN", "Grad-CAM", "OpenCV"],
-      metrics: [
-        { label: "Classification Accuracy", value: "~87%" },
-        { label: "Backbone Architecture", value: "MobileNetV2" },
-        { label: "Interpretability Method", value: "Grad-CAM" },
-        { label: "Domain", value: "Retinal Diagnostics" }
-      ],
-      breakdown: {
-        problem: "Automating retinal disease detection requires not only high empirical accuracy but also diagnostic interpretability so ophthalmologists can understand why a neural network flags a given pathology.",
-        approach: "Employed transfer learning on retinal fundus images with systematic preprocessing, image augmentation, adaptive learning rate scheduling, and cross-entropy optimization.",
-        model: "MobileNetV2 backbone pretrained on ImageNet, fine-tuned on curated retinal datasets for high-efficiency feature extraction without excessive parameter footprint.",
-        explainability: "Integrated Grad-CAM to compute gradients of the target class score with respect to feature activation maps of the final convolutional layer, producing transparent heatmaps of vascular lesions.",
-        results: "Achieved approximately 87% validation accuracy while confirming that model attention correlates with clinically documented physiological biomarkers."
-      },
-      // PLACEHOLDER: Replace with your actual repository URL
-      githubUrl: "https://github.com/tirtha-patil",
-      liveDemoUrl: "", // Leave empty if not available
-      paperUrl: "",    // Leave empty if not available
-      demoVideoUrl: "" // Leave empty if not available
-    },
-    {
-      id: "diabetes-prediction",
-      featured: false,
-      title: "Diabetes Outcome Prediction using Machine Learning",
-      category: "Machine Learning / Explainable AI",
-      shortDescription: "Predictive modeling pipeline employing Random Forest, SVM, and KNN, achieving ~75% accuracy and 0.83 ROC-AUC, interpreted using SHAP feature attributions.",
-      longDescription: "Engineered a systematic disease prediction pipeline with data scaling, outlier management, and hyperparameter tuning. Integrated SHapley Additive exPlanations (SHAP) to quantify global and local feature importance, identifying glucose and BMI as primary diagnostic drivers.",
-      technologies: ["Python", "Scikit-learn", "Random Forest", "SVM", "KNN", "SHAP", "Pandas"],
-      metrics: [
-        { label: "ROC-AUC Score", value: "0.83" },
-        { label: "Model Accuracy", value: "~75%" },
-        { label: "Explainability", value: "SHAP Values" },
-        { label: "Key Features", value: "Glucose, BMI" }
-      ],
-      githubUrl: "https://github.com/tirtha-patil",
-      liveDemoUrl: "",
-      paperUrl: ""
-    },
-    {
-      id: "medical-data-visualization",
-      featured: false,
-      title: "Medical Data Visualization & Analysis",
-      category: "Data Analysis / Healthcare AI",
-      shortDescription: "Comprehensive exploratory data analysis on clinical diabetes records, establishing correlation matrices and statistical distributions across biomarkers.",
-      longDescription: "Investigated inter-feature correlations, distributions, and skewness across clinical variables. Provided foundational empirical evidence establishing glucose concentration as the single strongest predictive marker for insulin resistance outcomes.",
-      technologies: ["Python", "Pandas", "NumPy", "Matplotlib", "Seaborn"],
-      metrics: [
-        { label: "Dataset", value: "Pima Indian Diabetes" },
-        { label: "Primary Predictor", value: "Glucose" },
-        { label: "Analysis Types", value: "EDA, Correlation" },
-        { label: "Tooling", value: "Seaborn & Pandas" }
-      ],
-      githubUrl: "https://github.com/tirtha-patil",
-      liveDemoUrl: "",
-      paperUrl: ""
+      title: "CNN, Grad-CAM Based Retina Disease Detector",
+      description: "Developed a retinal disease classification model using MobileNetV2, TensorFlow, and Keras to identify Diabetic Retinopathy, Glaucoma, and Normal retinal images using combined public datasets, including APTOS 2019 and G1020, with Grad-CAM heatmaps for visual explanations of model predictions.",
+      githubUrl: "https://github.com/tirtha-patil/CNN-Grad-CAM-based-Retina-Disease-Detector",
+      liveDemoUrl: ""
     },
     {
       id: "lifestyle-health-outcome",
-      featured: false,
-      title: "Lifestyle-Based Health Outcome Prediction using Explainable AI",
-      category: "Machine Learning / Explainable AI",
-      shortDescription: "Trained and benchmarked Gradient Boosting, XGBoost, CatBoost, and Random Forest across 100,000+ records, reaching 75.18% accuracy with full SHAP transparency.",
-      longDescription: "Performed large-scale data preprocessing, feature engineering, and model comparison across ensemble algorithms. Designed comprehensive data visualizations including correlation heatmaps, model comparison charts, confusion matrices, and SHAP summary plots.",
-      technologies: ["Python", "Scikit-learn", "Gradient Boosting", "XGBoost", "CatBoost", "SHAP", "Pandas"],
-      metrics: [
-        { label: "Dataset Scale", value: "100,000+ Records" },
-        { label: "Best Accuracy", value: "75.18%" },
-        { label: "Best Model", value: "Gradient Boosting" },
-        { label: "Interpretability", value: "SHAP Summary Plots" }
-      ],
-      githubUrl: "https://github.com/tirtha-patil",
-      liveDemoUrl: "",
-      paperUrl: ""
+      title: "Lifestyle Health Outcome Prediction",
+      description: "Built a health risk prediction framework using a ~100,000-record Health Lifestyle Dataset, comparing Gradient Boosting, XGBoost, CatBoost, Random Forest, Extra Trees, and MLP, with Gradient Boosting achieving 75.18% accuracy and SHAP providing interpretable feature-level explanations using Python, Pandas, NumPy, and Scikit-learn.",
+      githubUrl: "https://github.com/tirtha-patil/Lifestyle-Health-Outcome-Prediction",
+      liveDemoUrl: ""
     },
     {
       id: "chatterbox-realtime-chat",
-      featured: false,
-      title: "Chatterbox – Real-Time WebSocket Chat Application",
-      category: "Backend / Real-Time Systems",
-      shortDescription: "High-concurrency chat server built with FastAPI and WebSockets, supporting real-time chat rooms, typing indicators, and asynchronous broadcast events.",
-      longDescription: "Engineered during the Infosys Virtual Internship 6.0 in a six-member agile collaborative team. Focused on low-latency bidirectional socket protocols and clean RESTful API design.",
-      technologies: ["Python", "FastAPI", "WebSockets", "Uvicorn", "HTML", "CSS", "JavaScript"],
-      metrics: [
-        { label: "Protocol", value: "WebSockets" },
-        { label: "Backend", value: "FastAPI / Uvicorn" },
-        { label: "Team Size", value: "6 Members" },
-        { label: "Context", value: "Infosys Internship 6.0" }
-      ],
-      githubUrl: "https://github.com/tirtha-patil",
-      liveDemoUrl: "",
-      paperUrl: ""
+      title: "Chatterbox: A Real-Time WebSocket Chat Application",
+      description: "Developed a real-time messaging application using Python, FastAPI, Uvicorn, WebSockets, and Socket.IO, enabling live bidirectional communication between users through event-driven messaging without requiring repeated page refreshes.",
+      githubUrl: "https://github.com/tirtha-patil/Chatterbox-A-Real-time-WebSocket-Chat-Application-Meeting-Invite-Infosys-Internship-Project-",
+      liveDemoUrl: "https://chatterbox-a-real-time-websocket-chat.onrender.com/"
+    },
+    {
+      id: "medical-data-visualization",
+      title: "Medical Data Visualization",
+      description: "Performed exploratory data analysis on the Pima Indians Diabetes Database using Python, Pandas, NumPy, Matplotlib, and Seaborn to examine health indicators, visualize feature distributions and correlations, and identify glucose levels as a prominent feature associated with diabetes outcomes.",
+      githubUrl: "https://github.com/tirtha-patil/medical_data_visualization",
+      liveDemoUrl: ""
+    },
+    {
+      id: "diabetes-prediction",
+      title: "Diabetes Prediction ML",
+      description: "Developed a machine learning pipeline using the Pima Indians Diabetes Database to predict diabetes outcomes from diagnostic health attributes, applying data preprocessing, feature analysis, model training, and performance evaluation using Python and Scikit-learn.",
+      githubUrl: "https://github.com/tirtha-patil/Diabetics_Prediction_ML",
+      liveDemoUrl: ""
     }
   ],
 
