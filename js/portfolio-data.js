@@ -16,8 +16,8 @@ const PORTFOLIO_DATA = {
     tagline: "Machine Learning • Computer Vision • Explainable AI",
     subheadline: "B.Tech Computer Science & Engineering (AI & ML) Student",
     affiliation: "Vishwakarma Institute of Technology, Pune",
-    bio: "I'm a Computer Science & Engineering student focused on building intelligent systems and exploring research at the intersection of machine learning, computer vision, and explainable AI.",
-    statusBadge: "Currently exploring • ML Research • Computer Vision • Explainable AI",
+    bio: "I'm a Computer Science and Engineering student focused on building intelligent systems and exploring research at the intersection of artificial intelligence, computer vision, and natural language processing.",
+    statusBadge: "Currently exploring • ML Research • Computer Vision • NLP",
     researchPhilosophy: "Dedicated to developing transparent, high-impact intelligent models with a primary focus on healthcare applications and interpretable deep learning architectures.",
     email: "tirtha.patil24@vit.edu",
     github: "https://github.com/tirtha-patil",
@@ -33,52 +33,40 @@ const PORTFOLIO_DATA = {
   // Research Interests (Prioritized for Academic & Research Evaluators)
   researchInterests: [
     {
-      id: "computer-vision",
-      title: "Computer Vision",
-      badge: "Vision AI",
-      icon: "eye",
-      shortDescription: "Visual feature extraction, deep convolutional architectures, and automated diagnostic image analysis in medical imaging domains.",
-      focusKeywords: ["CNNs", "MobileNetV2", "Feature Attribution", "Medical Imaging", "OpenCV"]
+      id: "artificial-intelligence",
+      title: "Artificial Intelligence",
+      icon: "cpu",
+      shortDescription: "The science of creating machines capable of tasks that typically require human intelligence."
     },
     {
-      id: "explainable-ai",
-      title: "Explainable AI (XAI)",
-      badge: "Interpretability",
-      icon: "sparkles",
-      shortDescription: "Uncovering black-box model decisions using feature attribution, gradient-weighted class activation mapping (Grad-CAM), and SHAP analysis.",
-      focusKeywords: ["Grad-CAM", "SHAP", "Model Transparency", "Attribution Maps"]
-    },
-    {
-      id: "healthcare-ai",
-      title: "Healthcare AI",
-      badge: "Clinical Applications",
-      icon: "activity",
-      shortDescription: "Applying robust statistical learning and computer vision to early disease screening, risk stratification, and diagnostic assistance.",
-      focusKeywords: ["Retinal Fundus Analysis", "Diabetic Retinopathy", "Outcome Prediction", "Pima Dataset"]
+      id: "data-science",
+      title: "Data Science",
+      icon: "database",
+      shortDescription: "The field of extracting meaningful insights form data using statistical methods, analytical techniques and computational tools."
     },
     {
       id: "machine-learning",
       title: "Machine Learning",
-      badge: "Statistical Learning",
-      icon: "cpu",
-      shortDescription: "Supervised and ensemble learning methods, probabilistic modeling, and disciplined evaluation pipelines for predictive tasks.",
-      focusKeywords: ["Random Forest", "SVM", "Ensemble Methods", "ROC-AUC Optimization"]
+      icon: "network",
+      shortDescription: "branch of AI that enables machines to learn patterns from data and make predictions or decisions."
     },
     {
-      id: "deep-learning",
-      title: "Deep Learning",
-      badge: "Neural Networks",
-      icon: "layers",
-      shortDescription: "Transfer learning, convolutional neural networks, and lightweight edge-deployable vision architectures with fine-tuned representations.",
-      focusKeywords: ["TensorFlow/Keras", "Transfer Learning", "Backpropagation", "Architectures"]
+      id: "computer-vision",
+      title: "Computer Vision",
+      icon: "eye",
+      shortDescription: "A field of AI that enables machines to interpret and understand visual information from images and videos."
     },
     {
-      id: "interpretable-ml",
-      title: "Interpretable Machine Learning",
-      badge: "Trust & Safety",
-      icon: "shield-check",
-      shortDescription: "Bridging the gap between empirical model accuracy and clinical trust through rigorous validation and human-interpretable feature importance.",
-      focusKeywords: ["Feature Importance", "Decision Boundaries", "Trustworthy AI", "Error Analysis"]
+      id: "natural-language-processing",
+      title: "Natural Language Processing",
+      icon: "message-square",
+      shortDescription: "A branch of AI that enables machines to understand, interpret and generate human language."
+    },
+    {
+      id: "ai-in-healthcare",
+      title: "AI in Healthcare",
+      icon: "activity",
+      shortDescription: "the application of artificial intelligence to medical data and healthcare challenges to support diagnosis, treatment and clinical decision making."
     }
   ],
 

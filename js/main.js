@@ -37,7 +37,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 7. Initialize Robot Companion Character
   initRobotCompanion();
+
+  // 8. Typewriter effect on hero heading
+  initHeroTypewriter();
 });
+
+/* ==========================================================================
+   Hero Heading Typewriter Effect
+   ========================================================================== */
+function initHeroTypewriter() {
+  const headline = document.getElementById('hero-headline');
+  if (!headline) return;
+
+  // Respect reduced-motion — show full text immediately, skip animation
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  const plainText  = "Hi, I'm ";
+  const accentText = "Tirtha.";
+  const fullText   = plainText + accentText;
+
+  // Replace heading content with typing targets + blinking cursor
+  headline.innerHTML =
+    '<span id="tw-plain"></span>' +
+    '<span class="gradient-text" id="tw-accent"></span>' +
+    '<span class="typewriter-cursor" id="tw-cursor" aria-hidden="true"></span>';
+
+  const plainEl  = document.getElementById('tw-plain');
+  const accentEl = document.getElementById('tw-accent');
+  const cursor   = document.getElementById('tw-cursor');
+
+  let index = 0;
+  const SPEED_MS = 82; // ~82 ms per character — natural typing pace
+
+  function typeNextChar() {
+    if (index >= fullText.length) {
+      // Typing done — fade out cursor after short pause
+      setTimeout(() => { if (cursor) cursor.remove(); }, 900);
+      return;
+    }
+    const ch = fullText[index];
+    if (index < plainText.length) {
+      plainEl.textContent += ch;
+    } else {
+      accentEl.textContent += ch;
+    }
+    index++;
+    setTimeout(typeNextChar, SPEED_MS);
+  }
+
+  // Small initial delay so the page feels settled before typing starts
+  setTimeout(typeNextChar, 300);
+}
 
 /* ==========================================================================
    Sound Controls & Tactile Audio Feedback
@@ -96,29 +148,21 @@ function renderResearchInterests() {
   if (!container || !PORTFOLIO_DATA.researchInterests) return;
 
   const icons = {
-    eye: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>`,
-    sparkles: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>`,
-    activity: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`,
-    cpu: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>`,
-    layers: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`,
-    "shield-check": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>`
+    cpu: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>`,
+    database: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>`,
+    network: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"></rect><rect x="2" y="16" width="6" height="6" rx="1"></rect><rect x="9" y="2" width="6" height="6" rx="1"></rect><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"></path><path d="M12 12V8"></path></svg>`,
+    eye: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>`,
+    "message-square": `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>`,
+    activity: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>`
   };
 
   container.innerHTML = PORTFOLIO_DATA.researchInterests.map(item => `
     <div class="research-card">
-      <div class="research-card-top">
-        <div class="research-icon-wrapper">
-          ${icons[item.icon] || icons.cpu}
-        </div>
-        <span class="research-badge">${item.badge}</span>
+      <div class="research-icon-wrapper">
+        ${icons[item.icon] || icons.cpu}
       </div>
-      <div>
-        <h3 class="research-card-title">${item.title}</h3>
-        <p class="research-card-desc" style="margin-top: 8px;">${item.shortDescription}</p>
-      </div>
-      <div class="research-keywords">
-        ${item.focusKeywords.map(kw => `<span class="research-kw-chip">${kw}</span>`).join('')}
-      </div>
+      <h3 class="research-card-title">${item.title}</h3>
+      <p class="research-card-desc">${item.shortDescription}</p>
     </div>
   `).join('');
 }
@@ -804,25 +848,102 @@ function initContactForm() {
 function initRobotCompanion() {
   const robotContainer = document.getElementById('robot-companion');
   const speechBubble = document.getElementById('robot-speech');
+  const robotAvatar = document.getElementById('robot-avatar');
+  const closeBtn = document.getElementById('robot-speech-close');
+  const contactCta = document.getElementById('robot-contact-cta');
+
   if (!robotContainer || !speechBubble) return;
 
-  let hideTimeout = null;
+  let isBubbleVisible = false;
 
-  function triggerGreeting() {
-    robotContainer.classList.add('active');
-    if (typeof audioManager !== 'undefined') {
-      audioManager.playChirp();
+  function showBubble(playAudio = false) {
+    speechBubble.classList.add('active');
+    isBubbleVisible = true;
+    if (playAudio && typeof audioManager !== 'undefined') {
+      try {
+        audioManager.playChirp();
+      } catch (err) {
+        // Browser autoplay restriction handled gracefully
+      }
     }
-    clearTimeout(hideTimeout);
-    hideTimeout = setTimeout(() => {
-      robotContainer.classList.remove('active');
-    }, 3200);
   }
 
-  robotContainer.addEventListener('click', triggerGreeting);
-  robotContainer.addEventListener('mouseenter', () => {
-    if (typeof audioManager !== 'undefined') {
-      audioManager.playChirp();
+  function hideBubble() {
+    speechBubble.classList.remove('active');
+    isBubbleVisible = false;
+  }
+
+  function scrollToContact() {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      const header = document.querySelector('.site-header');
+      const headerOffset = (header ? header.offsetHeight : 70) + 24;
+      const elementPosition = contactSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: isReduced ? 'auto' : 'smooth'
+      });
     }
-  });
+    hideBubble();
+  }
+
+  // 1. Initial Page Load Greeting
+  // Automatically display the speech bubble with subtle intro timing
+  setTimeout(() => {
+    showBubble(true);
+  }, 400);
+
+  // 2. Dismiss / Close button
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hideBubble();
+      if (typeof audioManager !== 'undefined') {
+        audioManager.playClick();
+      }
+    });
+  }
+
+  // 3. CTA "Send me a message 💌"
+  if (contactCta) {
+    contactCta.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof audioManager !== 'undefined') {
+        audioManager.playClick();
+      }
+      scrollToContact();
+    });
+  }
+
+  // 4. Robot Avatar Interaction
+  if (robotAvatar) {
+    const handleAvatarInteraction = () => {
+      if (!isBubbleVisible) {
+        showBubble(true);
+      } else {
+        // If bubble is already visible, clicking the robot navigates directly to contact section
+        if (typeof audioManager !== 'undefined') {
+          audioManager.playClick();
+        }
+        scrollToContact();
+      }
+    };
+
+    robotAvatar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      handleAvatarInteraction();
+    });
+
+    robotAvatar.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        handleAvatarInteraction();
+      }
+    });
+  }
 }
