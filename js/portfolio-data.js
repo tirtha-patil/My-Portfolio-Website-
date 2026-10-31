@@ -23,7 +23,7 @@ const PORTFOLIO_DATA = {
     github: "https://github.com/tirtha-patil",
     linkedin: "https://www.linkedin.com/in/tirtha-patil/",
     instagram: "https://www.instagram.com/ft._.tirthaaaa?cplk=NXo2aXlidTA1cGFm",
-    resumePdfPath: "assets/Resume (1).pdf",
+    resumePdfPath: "assets/Tirtha Patil CV.pdf",
     location: "Pune, India",
     openForOpportunities: true,
     opportunityText: "Available for AI/ML Research Internships & Collaborations"
