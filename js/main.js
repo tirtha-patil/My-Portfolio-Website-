@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Render Dynamic Portfolio Sections
   renderResearchInterests();
   renderProjects();
-  renderSkills();
   renderCertifications();
   renderExperience();
   renderEducation();
@@ -54,9 +53,9 @@ function initHeroTypewriter() {
     return;
   }
 
-  const plainText  = "Hi, I'm ";
+  const plainText = "Hi, I'm ";
   const accentText = "Tirtha.";
-  const fullText   = plainText + accentText;
+  const fullText = plainText + accentText;
 
   // Replace heading content with typing targets + blinking cursor
   headline.innerHTML =
@@ -64,9 +63,9 @@ function initHeroTypewriter() {
     '<span class="gradient-text" id="tw-accent"></span>' +
     '<span class="typewriter-cursor" id="tw-cursor" aria-hidden="true"></span>';
 
-  const plainEl  = document.getElementById('tw-plain');
+  const plainEl = document.getElementById('tw-plain');
   const accentEl = document.getElementById('tw-accent');
-  const cursor   = document.getElementById('tw-cursor');
+  const cursor = document.getElementById('tw-cursor');
 
   let index = 0;
   const SPEED_MS = 82; // ~82 ms per character — natural typing pace
@@ -121,22 +120,40 @@ function initAudioControls() {
     }
   }
 
+  // Pre-unlock AudioContext on first user interaction for zero latency
+  const unlockAudio = () => {
+    if (typeof audioManager !== 'undefined') {
+      const ctx = audioManager.getAudioContext();
+      if (ctx && ctx.state === 'suspended') {
+        ctx.resume().catch(() => { });
+      }
+    }
+    document.removeEventListener('pointerdown', unlockAudio, true);
+    document.removeEventListener('keydown', unlockAudio, true);
+  };
+  document.addEventListener('pointerdown', unlockAudio, { passive: true, capture: true });
+  document.addEventListener('keydown', unlockAudio, { passive: true, capture: true });
+
   // Initial state check
   if (typeof audioManager !== 'undefined') {
     updateButtonState(audioManager.enabled);
 
-    soundToggleBtn.addEventListener('click', () => {
+    soundToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isEnabled = audioManager.toggle();
       updateButtonState(isEnabled);
     });
 
-    // Attach soft click sound to all interactive elements
+    // Attach soft click sound to all interactive elements across the website using capture phase
     document.addEventListener('click', (e) => {
-      const target = e.target.closest('button, a, .tab-btn, .clickable');
-      if (target && !target.closest('#sound-toggle')) {
+      if (!audioManager.enabled) return;
+      const target = e.target.closest('button, a, input[type="submit"], input[type="button"], [role="button"], .btn, .nav-link, .sound-toggle-btn, .robot-avatar, .channel-action-btn, .social-btn, .view-cert-btn, .tab-btn, .clickable');
+      if (target) {
+        // Sound toggle manages its own audio feedback in toggle()
+        if (target.closest('#sound-toggle')) return;
         audioManager.playClick();
       }
-    });
+    }, true);
   }
 }
 
@@ -214,124 +231,76 @@ function renderProjects() {
 }
 
 /* ==========================================================================
-   Render Technical Skills
-   ========================================================================== */
-function renderSkills() {
-  const container = document.getElementById('skills-grid');
-  if (!container || !PORTFOLIO_DATA.skills) return;
-
-  const categories = [
-    {
-      title: "Programming Languages",
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>`,
-      items: PORTFOLIO_DATA.skills.programming.map(p => ({ name: p.name, note: p.level }))
-    },
-    {
-      title: "Machine Learning & Neural Models",
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`,
-      items: PORTFOLIO_DATA.skills.machineLearning
-    },
-    {
-      title: "Scientific Computing & Analytics",
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>`,
-      items: PORTFOLIO_DATA.skills.libraries
-    },
-    {
-      title: "Developer Tools & Frameworks",
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>`,
-      items: PORTFOLIO_DATA.skills.toolsFrameworks
-    }
-  ];
-
-  container.innerHTML = categories.map(cat => `
-    <div class="skill-category-card">
-      <h3 class="skill-cat-title">
-        <span class="skill-cat-icon">${cat.icon}</span>
-        ${cat.title}
-      </h3>
-      <div class="skill-pills-list">
-        ${cat.items.map(item => `
-          <div class="skill-chip">
-            <span class="skill-chip-name">${item.name}</span>
-            <span class="skill-chip-note">${item.note}</span>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `).join('');
-}
-
-/* ==========================================================================
    Render Certifications
    ========================================================================== */
 function renderCertifications() {
   const container = document.getElementById('certs-grid');
   if (!container || !PORTFOLIO_DATA.certifications) return;
 
-  container.innerHTML = PORTFOLIO_DATA.certifications.map((cert, idx) => `
-    <div class="cert-card">
-      <div>
-        <div class="cert-card-top">
-          <span class="cert-badge">${cert.badge}</span>
-          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">${cert.date}</span>
-        </div>
-        <h4 class="cert-title">${cert.title}</h4>
-        <div class="cert-issuer" style="margin-top: 4px;">${cert.issuer}</div>
-        <p class="cert-desc" style="margin-top: 10px;">${cert.description}</p>
+  container.innerHTML = PORTFOLIO_DATA.certifications.map(cert => `
+    <article class="cert-card">
+      <div class="cert-card-body">
+        <h3 class="cert-title">${cert.title}</h3>
+        <div class="cert-issuer">${cert.issuer}</div>
       </div>
-
-      <div class="cert-actions">
-        <button class="btn btn-secondary btn-sm view-cert-btn" data-cert-index="${idx}">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-          View Credential
-        </button>
-        <a href="${cert.file}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="Open PDF in new tab" title="Open PDF directly in new tab">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-        </a>
+      <div class="cert-card-action">
+        <a href="${encodeURI(cert.file)}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm cert-view-btn">View</a>
       </div>
-    </div>
+    </article>
   `).join('');
-
-  // Attach modal triggers for certs
-  const certButtons = container.querySelectorAll('.view-cert-btn');
-  certButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const idx = parseInt(btn.getAttribute('data-cert-index'), 10);
-      const cert = PORTFOLIO_DATA.certifications[idx];
-      if (cert) {
-        openCertModal(cert);
-      }
-    });
-  });
 }
 
 /* ==========================================================================
-   Render Experience Timeline
+   Render Experience Section
    ========================================================================== */
 function renderExperience() {
-  const container = document.getElementById('experience-timeline');
+  const container = document.getElementById('experience-container') || document.getElementById('experience-timeline');
   if (!container || !PORTFOLIO_DATA.experience) return;
 
   container.innerHTML = PORTFOLIO_DATA.experience.map(item => `
-    <div class="timeline-item">
-      <div class="timeline-node"></div>
-      <div class="timeline-card">
-        <div class="timeline-header">
-          <div>
-            <h4 class="timeline-role">${item.role}</h4>
-            <div class="timeline-org">${item.organization}</div>
-          </div>
-          <span class="timeline-period">${item.period}</span>
+    <article class="experience-card">
+      <div class="exp-card-header">
+        <div class="exp-meta">
+          <h3 class="exp-role">${item.role}</h3>
+          <div class="exp-org">${item.organization}</div>
         </div>
-        <p class="timeline-desc">${item.description}</p>
-        <ul class="timeline-bullets">
-          ${item.highlights.map(h => `<li>${h}</li>`).join('')}
-        </ul>
-        <div class="project-tech-tags">
-          ${item.technologies.map(t => `<span class="tech-tag">${t}</span>`).join('')}
-        </div>
+        ${item.certificateUrl ? `
+          <a href="${encodeURI(item.certificateUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm exp-btn exp-cert-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            View Certificate
+          </a>
+        ` : ''}
       </div>
-    </div>
+
+      <ul class="exp-bullets">
+        ${item.highlights.map(h => `<li>${h}</li>`).join('')}
+      </ul>
+
+      <div class="exp-actions">
+        ${item.githubUrl ? `
+          <a href="${item.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm exp-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            GitHub
+          </a>
+        ` : ''}
+        ${item.liveDemoUrl ? `
+          <a href="${item.liveDemoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm exp-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polygon points="10 8 16 12 10 16 10 8"></polygon>
+            </svg>
+            Live Demo
+          </a>
+        ` : ''}
+      </div>
+    </article>
   `).join('');
 }
 
@@ -374,26 +343,38 @@ function renderEducation() {
 }
 
 /* ==========================================================================
-   Render Leadership & Activities ("Beyond the Lab")
+   Render Beyond Academics Section
    ========================================================================== */
 function renderLeadership() {
-  const container = document.getElementById('leadership-grid');
-  if (!container || !PORTFOLIO_DATA.leadership) return;
+  renderBeyondAcademics();
+}
 
-  container.innerHTML = PORTFOLIO_DATA.leadership.map(item => `
-    <div class="leadership-card">
-      <div class="leadership-header">
-        <div>
-          <h3 class="leadership-org">${item.organization}</h3>
-          <div class="leadership-role">${item.role}</div>
+function renderBeyondAcademics() {
+  const container = document.getElementById('beyond-academics-grid') || document.getElementById('leadership-grid');
+  const items = PORTFOLIO_DATA.beyondAcademics || PORTFOLIO_DATA.leadership;
+  if (!container || !items) return;
+
+  container.innerHTML = items.map(item => `
+    <article class="activity-card">
+      <div class="activity-card-body">
+        <div class="activity-card-top">
+          <h3 class="activity-title">${item.title}</h3>
+          ${item.status ? `
+            <span class="activity-status status-${item.status.toLowerCase()}">${item.status}</span>
+          ` : ''}
         </div>
-        <span class="leadership-time">${item.timeline}</span>
+        ${item.subtitle ? `<div class="activity-subtitle">${item.subtitle}</div>` : ''}
+        ${item.role ? `<div class="activity-role">${item.role}</div>` : ''}
       </div>
-      <p style="color: var(--text-secondary); line-height: 1.6;">${item.description}</p>
-      <ul class="timeline-bullets" style="margin-bottom: 0;">
-        ${item.responsibilities.map(r => `<li>${r}</li>`).join('')}
-      </ul>
-    </div>
+
+      ${item.certificateUrl ? `
+        <div class="activity-card-action">
+          <a href="${encodeURI(item.certificateUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm cert-view-btn">
+            View
+          </a>
+        </div>
+      ` : ''}
+    </article>
   `).join('');
 }
 
@@ -418,9 +399,9 @@ function renderContactInfo() {
           <a href="mailto:${p.email}" class="channel-val">${p.email}</a>
         </div>
       </div>
-      <button class="channel-action-btn" id="copy-email-btn" title="Copy email address">
-        Copy
-      </button>
+      <a href="mailto:${p.email}" class="channel-action-btn" title="Compose email in your email app">
+        Compose ↗
+      </a>
     </div>
 
     <!-- GitHub Channel -->
@@ -455,40 +436,23 @@ function renderContactInfo() {
       </a>
     </div>
 
-    <!-- Instagram Placeholder (Clearly marked) -->
+    <!-- Instagram Channel -->
     <div class="contact-channel-item">
       <div class="channel-meta">
         <div class="channel-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
         </div>
         <div>
-          <div class="channel-label">Instagram (Configurable)</div>
-          <a href="${p.instagram}" target="_blank" rel="noopener noreferrer" class="channel-val">Instagram Profile</a>
+          <div class="channel-label">Instagram</div>
+          <a href="${p.instagram}" target="_blank" rel="noopener noreferrer" class="channel-val">@ft._.tirthaaaa</a>
         </div>
       </div>
       <a href="${p.instagram}" target="_blank" rel="noopener noreferrer" class="channel-action-btn">
-        Open ↗
+        Visit ↗
       </a>
     </div>
   `;
 
-  // Email Copy button
-  const copyBtn = document.getElementById('copy-email-btn');
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(p.email).then(() => {
-        const origText = copyBtn.textContent;
-        copyBtn.textContent = 'Copied!';
-        copyBtn.style.color = '#34D399';
-        copyBtn.style.borderColor = '#34D399';
-        setTimeout(() => {
-          copyBtn.textContent = origText;
-          copyBtn.style.color = '';
-          copyBtn.style.borderColor = '';
-        }, 2200);
-      });
-    });
-  }
 }
 
 /* ==========================================================================
@@ -588,9 +552,6 @@ function openModal(modal) {
   if (!modal) return;
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
-  if (typeof audioManager !== 'undefined') {
-    audioManager.playModalSound();
-  }
 }
 
 function closeModal(modal) {
@@ -633,70 +594,94 @@ function initContactForm() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // Check honeypot spam protection
+    // Honeypot spam protection
     const honeypot = form.querySelector('input[name="_honey"]');
-    if (honeypot && honeypot.value) {
-      // Spam bot detected, silently drop
-      return;
-    }
+    if (honeypot && honeypot.value) return;
 
-    const name = form.querySelector('#sender-name')?.value.trim();
-    const email = form.querySelector('#sender-email')?.value.trim();
-    const subject = form.querySelector('#sender-subject')?.value.trim();
-    const message = form.querySelector('#sender-message')?.value.trim();
+    const name = (form.querySelector('#sender-name')?.value || '').trim();
+    const email = (form.querySelector('#sender-email')?.value || '').trim();
+    const subject = (form.querySelector('#sender-subject')?.value || '').trim();
+    const message = (form.querySelector('#sender-message')?.value || '').trim();
 
-    // Validation
+    // Validate all four fields
     if (!name || !email || !subject || !message) {
       showFeedback('Please fill out all required fields.', 'error');
       return;
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       showFeedback('Please provide a valid email address.', 'error');
       return;
     }
 
-    // Set loading state
-    const originalBtnContent = submitBtn.innerHTML;
+    // Loading state
+    const originalBtnHTML = submitBtn.innerHTML;
     submitBtn.disabled = true;
     submitBtn.innerHTML = `
       <svg class="spin-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="1"></path></svg>
-      Sending Transmission...
+      Sending Message...
     `;
 
     const endpoint = PORTFOLIO_DATA.config?.contactFormEndpoint;
+    const ejsCfg = PORTFOLIO_DATA.config?.emailjs;
+    const ejsReady = ejsCfg && ejsCfg.serviceId && ejsCfg.templateId && ejsCfg.publicKey
+      && ejsCfg.serviceId.trim() && ejsCfg.templateId.trim() && ejsCfg.publicKey.trim();
 
     try {
-      if (endpoint && endpoint.trim().length > 0) {
-        // Dispatch to custom or Formspree endpoint
+      if (ejsReady) {
+        // ── EmailJS direct-send path ──────────────────────────────────────
+        if (typeof emailjs === 'undefined') {
+          throw new Error('EmailJS SDK not loaded. Check your internet connection and refresh.');
+        }
+        await emailjs.send(
+          ejsCfg.serviceId,
+          ejsCfg.templateId,
+          {
+            name: name,
+            email: email,
+            subject: subject,
+            message: message,
+            to_email: 'patiltirtha8811@gmail.com'
+          },
+          ejsCfg.publicKey
+        );
+        form.reset();
+        showFeedback('Message sent! I\'ll get back to you soon.', 'success');
+
+      } else if (endpoint && endpoint.trim().length > 0) {
+        // ── Custom / Formspree endpoint path ─────────────────────────────
         const response = await fetch(endpoint, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({ name, email, subject, message })
         });
-
-        if (response.ok) {
-          form.reset();
-          showFeedback('Thank you! Your message has been transmitted successfully. I will get back to you shortly.', 'success');
-        } else {
-          throw new Error('Endpoint returned error');
-        }
-      } else {
-        // Fallback for direct mailto delivery when no backend API key is connected
-        const mailtoUrl = `mailto:${PORTFOLIO_DATA.personal.email}?subject=${encodeURIComponent(`[Portfolio Contact] ${subject}`)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-        window.location.href = mailtoUrl;
+        if (!response.ok) throw new Error('Endpoint returned error status ' + response.status);
         form.reset();
-        showFeedback('Message dispatched to your default mail client! I look forward to connecting.', 'success');
+        showFeedback('Message sent successfully! I\'ll get back to you shortly.', 'success');
+
+      } else {
+        // ── No delivery method configured ────────────────────────────────
+        // Do NOT fake success or redirect to mailto. Show clear setup instructions.
+        showFeedback(
+          'Email delivery is not configured yet. ' +
+          'To enable real message delivery, open js/portfolio-data.js and add your EmailJS ' +
+          'serviceId, templateId, and publicKey under config.emailjs. ' +
+          'Visit emailjs.com to create a free account and get these values.',
+          'error'
+        );
+        // Inputs are intentionally preserved so the visitor does not lose their message.
+        return;
       }
     } catch (err) {
-      showFeedback('Transmission failed. Please reach out directly to tirtha.patil24@vit.edu', 'error');
+      console.error('[Contact Form] Send error:', err);
+      showFeedback(
+        'Failed to send your message. Please try again, or email me directly at patiltirtha8811@gmail.com.',
+        'error'
+      );
+      // Intentionally do NOT reset the form — preserve entered text.
     } finally {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnContent;
+      submitBtn.innerHTML = originalBtnHTML;
     }
   });
 
@@ -704,11 +689,9 @@ function initContactForm() {
     if (!feedback) return;
     feedback.textContent = text;
     feedback.className = `form-feedback ${type}`;
-    setTimeout(() => {
-      if (type === 'success') {
-        feedback.className = 'form-feedback';
-      }
-    }, 7000);
+    if (type === 'success') {
+      setTimeout(() => { feedback.className = 'form-feedback'; }, 7000);
+    }
   }
 }
 
@@ -761,9 +744,9 @@ function initRobotCompanion() {
   }
 
   // 1. Initial Page Load Greeting
-  // Automatically display the speech bubble with subtle intro timing
+  // Automatically display the speech bubble with subtle intro timing (silent on page load)
   setTimeout(() => {
-    showBubble(true);
+    showBubble(false);
   }, 400);
 
   // 2. Dismiss / Close button
@@ -771,9 +754,6 @@ function initRobotCompanion() {
     closeBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       hideBubble();
-      if (typeof audioManager !== 'undefined') {
-        audioManager.playClick();
-      }
     });
   }
 
@@ -782,9 +762,6 @@ function initRobotCompanion() {
     contactCta.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      if (typeof audioManager !== 'undefined') {
-        audioManager.playClick();
-      }
       scrollToContact();
     });
   }
@@ -793,12 +770,9 @@ function initRobotCompanion() {
   if (robotAvatar) {
     const handleAvatarInteraction = () => {
       if (!isBubbleVisible) {
-        showBubble(true);
+        showBubble(false);
       } else {
         // If bubble is already visible, clicking the robot navigates directly to contact section
-        if (typeof audioManager !== 'undefined') {
-          audioManager.playClick();
-        }
         scrollToContact();
       }
     };
@@ -812,6 +786,9 @@ function initRobotCompanion() {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         e.stopPropagation();
+        if (typeof audioManager !== 'undefined') {
+          audioManager.playClick();
+        }
         handleAvatarInteraction();
       }
     });

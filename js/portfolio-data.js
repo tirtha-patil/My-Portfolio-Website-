@@ -19,11 +19,10 @@ const PORTFOLIO_DATA = {
     bio: "I'm a Computer Science and Engineering student focused on building intelligent systems and exploring research at the intersection of artificial intelligence, computer vision, and natural language processing.",
     statusBadge: "Currently exploring • ML Research • Computer Vision • NLP",
     researchPhilosophy: "Dedicated to developing transparent, high-impact intelligent models with a primary focus on healthcare applications and interpretable deep learning architectures.",
-    email: "tirtha.patil24@vit.edu",
+    email: "patiltirtha8811@gmail.com",
     github: "https://github.com/tirtha-patil",
     linkedin: "https://www.linkedin.com/in/tirtha-patil/",
-    // EDITABLE PLACEHOLDER: Replace with your actual Instagram profile URL
-    instagram: "https://instagram.com/your_handle_placeholder",
+    instagram: "https://www.instagram.com/ft._.tirthaaaa?cplk=NXo2aXlidTA1cGFm",
     resumePdfPath: "assets/resume.pdf",
     location: "Pune, India",
     openForOpportunities: true,
@@ -161,41 +160,40 @@ const PORTFOLIO_DATA = {
     ]
   },
 
-  // Experience Timeline
+  // Experience Section
   experience: [
     {
       role: "Project Intern (Certified)",
       organization: "Infosys Virtual Internship 6.0",
-      period: "Internship Program",
-      badge: "Certified Internship",
-      description: "Collaborated in an intensive, team-based engineering environment delivering enterprise-grade backend APIs and asynchronous real-time infrastructure.",
+      certificateUrl: "assets/Infosys Springboard Internship.pdf",
+      githubUrl: "https://github.com/tirtha-patil/Chatterbox-A-Real-time-WebSocket-Chat-Application-Meeting-Invite-Infosys-Internship-Project-",
+      liveDemoUrl: "https://chatterbox-a-real-time-websocket-chat.onrender.com/",
       highlights: [
-        "Architected backend RESTful API endpoints utilizing FastAPI and asynchronous Python runtimes.",
-        "Implemented low-latency WebSocket communication channels with connection pooling and broadcast routing.",
-        "Collaborated in a multidisciplinary 6-member engineering team to design, test, and deliver the Chatterbox real-time messaging application.",
-        "Applied software engineering principles and version control workflows to maintain clean code and agile delivery milestones."
-      ],
-      technologies: ["FastAPI", "WebSockets", "Python", "Uvicorn", "Agile Scrum"]
+        "Developed Chatterbox, a real-time messaging application using Python and FastAPI.",
+        "Built backend APIs and WebSocket communication for instant messaging.",
+        "Collaborated with a six-member team to develop, test, and integrate the application. The project was later selected to be showcased to Infosys professionals.",
+        "Gained hands-on experience in backend development, teamwork, and version control."
+      ]
     }
   ],
 
-  // Real Authentic Certifications (Matched with files in assets/)
+  // Real Authentic Certifications (All verified credentials in assets/)
   certifications: [
     {
-      title: "Python Foundation Certification",
-      issuer: "Infosys Springboard",
+      title: "Deep Learning Specialization",
+      issuer: "DeepLearning.AI / Coursera",
       date: "Certified",
-      file: "assets/Python Foundation Certification.pdf",
-      description: "Core programming paradigms, computational problem solving, and Python standard libraries.",
-      badge: "Programming"
+      file: "assets/Deep Learning.pdf",
+      description: "Mastery of neural network architectures, CNNs, sequence models, transformers, hyperparameter tuning, and deep learning optimization.",
+      badge: "Deep Learning"
     },
     {
-      title: "Deloitte Virtual Internship Cyber Certificate",
-      issuer: "Deloitte / Forage",
+      title: "Financial Technology (Fintech) Innovations Specialization",
+      issuer: "University of Michigan / Coursera",
       date: "Certified",
-      file: "assets/Deloitte Virtual Internship Cyber Certificate.pdf",
-      description: "Practical virtual experience analyzing cyber security architectures and enterprise data risk.",
-      badge: "Industry Simulation"
+      file: "assets/FinTech.pdf",
+      description: "Payment technologies, blockchain, cryptocurrency, credit tech, AI in investment, and modern financial systems.",
+      badge: "FinTech"
     },
     {
       title: "McKinsey.org Forward Program",
@@ -206,36 +204,76 @@ const PORTFOLIO_DATA = {
       badge: "Leadership & Strategy"
     },
     {
-      title: "Agile Scrum in Practice",
-      issuer: "Infosys Springboard",
+      title: "Deloitte Virtual Internship Cyber Certificate",
+      issuer: "Deloitte / Forage",
       date: "Certified",
-      file: "assets/Agile Scrum in Practice.pdf",
-      description: "Iterative software development life cycle, sprint ceremonies, backlog grooming, and team collaboration.",
-      badge: "Engineering Process"
+      file: "assets/Deloitte Virtual Internship Cyber Certificate.pdf",
+      description: "Practical virtual experience analyzing cyber security architectures and enterprise data risk.",
+      badge: "Industry Simulation"
     },
     {
-      title: "Software Engineering & Agile Software Development",
-      issuer: "Infosys Springboard",
+      title: "1 Million Prompters Certificate",
+      issuer: "Generative AI Initiative",
       date: "Certified",
-      file: "assets/Software Engineering and Agile software development.pdf",
-      description: "System architecture, design patterns, testing strategies, and modern software lifecycle management.",
-      badge: "Engineering"
+      file: "assets/1 Million Prompters Certificate.pdf",
+      description: "Prompt engineering, generative model guidance, and structured output formatting.",
+      badge: "Generative AI"
     },
     {
-      title: "Database Management System (Part 1 & 2)",
+      title: "Python Foundation Certification",
       issuer: "Infosys Springboard",
       date: "Certified",
-      file: "assets/Database Management System Part - 1.pdf",
-      description: "Relational schema design, normalization, SQL querying, transaction management, and indexing.",
-      badge: "Data Systems"
+      file: "assets/Python Foundation Certification.pdf",
+      description: "Core programming paradigms, computational problem solving, and Python standard libraries.",
+      badge: "Programming"
     },
     {
-      title: "Programming Fundamentals & OOP using Python",
+      title: "Programming Fundamentals using Python - Part 1",
+      issuer: "Infosys Springboard",
+      date: "Certified",
+      file: "assets/Programming Fundamentals using Python - Part 1.pdf",
+      description: "Core algorithms, control flow, functions, and structured Python development.",
+      badge: "Programming"
+    },
+    {
+      title: "Programming Fundamentals using Python - Part 2",
+      issuer: "Infosys Springboard",
+      date: "Certified",
+      file: "assets/Programming Fundamentals using Python - Part 2.pdf",
+      description: "Advanced data structures, algorithmic design patterns, and debugging in Python.",
+      badge: "Programming"
+    },
+    {
+      title: "Object Oriented Programming using Python",
       issuer: "Infosys Springboard",
       date: "Certified",
       file: "assets/Object Oriented Programming using Python.pdf",
       description: "Object-oriented design, inheritance, polymorphism, encapsulation, and modular design.",
       badge: "Programming"
+    },
+    {
+      title: "Basics of Python",
+      issuer: "Infosys Springboard",
+      date: "Certified",
+      file: "assets/Basics of Python.pdf",
+      description: "Foundational programming constructs, syntax, and computational logic.",
+      badge: "Programming"
+    },
+    {
+      title: "Database Management System Part - 1",
+      issuer: "Infosys Springboard",
+      date: "Certified",
+      file: "assets/Database Management System Part - 1.pdf",
+      description: "Relational database architecture, entity-relationship models, and SQL querying.",
+      badge: "Data Systems"
+    },
+    {
+      title: "Database Management System Part - 2",
+      issuer: "Infosys Springboard",
+      date: "Certified",
+      file: "assets/Database Management System Part - 2.pdf",
+      description: "Normalization, transaction concurrency, ACID properties, and relational indexing.",
+      badge: "Data Systems"
     },
     {
       title: "Introduction to NoSQL Databases",
@@ -246,38 +284,63 @@ const PORTFOLIO_DATA = {
       badge: "Data Systems"
     },
     {
-      title: "1 Million Prompters Certificate",
-      issuer: "Generative AI Initiative",
+      title: "Software Engineering and Agile Software Development",
+      issuer: "Infosys Springboard",
       date: "Certified",
-      file: "assets/1 Million Prompters Certificate.pdf",
-      description: "Prompt engineering, generative model guidance, and structured output formatting.",
-      badge: "Generative AI"
+      file: "assets/Software Engineering and Agile software development.pdf",
+      description: "System architecture, design patterns, testing strategies, and modern software lifecycle management.",
+      badge: "Engineering"
+    },
+    {
+      title: "Agile Scrum in Practice",
+      issuer: "Infosys Springboard",
+      date: "Certified",
+      file: "assets/Agile Scrum in Practice.pdf",
+      description: "Iterative software development life cycle, sprint ceremonies, backlog grooming, and team collaboration.",
+      badge: "Engineering Process"
     }
   ],
 
-  // Extracurricular & Leadership ("Beyond the Lab")
-  leadership: [
+  // Extracurricular & Activities ("Beyond Academics")
+  beyondAcademics: [
     {
-      organization: "Abhivriddhi Student Development Club",
-      role: "Student Council Volunteer & Video Editing Coordinator",
-      timeline: "Active Contributor",
-      description: "Contributing to technical community initiatives, creative media production, and campus student development operations.",
-      responsibilities: [
-        "Coordinating video editing and visual media production for club events, workshops, and student outreach campaigns.",
-        "Assisting in organizing and executing technical seminars, peer learning sessions, and student development programs.",
-        "Collaborating across cross-functional student teams to ensure engaging content delivery and impactful digital presence."
-      ],
-      // Editable fields for user to add photos or more details
-      eventPhotosPlaceholder: true
+      title: "French DELF A1",
+      status: "Completed",
+      certificateUrl: "assets/DELF A1 Certificate.pdf"
+    },
+    {
+      title: "French A2",
+      subtitle: "Completion Certificate",
+      status: "Completed",
+      certificateUrl: "assets/A2 completion certificate.pdf"
+    },
+    {
+      title: "French B1",
+      status: "Ongoing"
+    },
+    {
+      title: "Abhivriddhi Student Development Committee",
+      role: "Video Editing Coordinator",
+      certificateUrl: "assets/Abhivriddhi-Video Editing Coordinator.pdf"
+    },
+    {
+      title: "Resin Art Workshop",
+      subtitle: "Organized under the Student Council at VIT, Pune"
     }
   ],
 
   // System Configuration
   config: {
-    // Replace with your Formspree endpoint (e.g. "https://formspree.io/f/your_form_id")
-    // or your custom serverless endpoint. Defaults to a mailto dispatch if unset.
+    // EmailJS Configuration (Direct transmission to patiltirtha8811@gmail.com)
+    // Configure at https://www.emailjs.com/
+    emailjs: {
+      serviceId: "service_qkluop2",    // e.g. "service_xxxxxxx"
+      templateId: "template_3pt3xx4",   // e.g. "template_xxxxxxx"
+      publicKey: "kJV50e0w18ChUG_W1"     // e.g. "xxxxxxxxxxxxxxxxxxxx" (EmailJS Public Key)
+    },
+    // Optional fallback endpoint (e.g. Formspree / serverless endpoint)
     contactFormEndpoint: "",
-    soundEnabledByDefault: false, // Polite default to respect browser autoplay policies
+    soundEnabledByDefault: true, // Default enabled for tactile micro-interactions
     analyticsEnabled: false
   }
 };

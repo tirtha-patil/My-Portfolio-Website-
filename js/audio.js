@@ -17,12 +17,14 @@ class AudioManager {
   }
 
   init() {
-    // Check localStorage preference, default to false (polite)
+    // Check localStorage preference, default to true if unconfigured
     const stored = localStorage.getItem(this.storageKey);
     if (stored !== null) {
       this.enabled = stored === 'true';
-    } else if (typeof PORTFOLIO_DATA !== 'undefined' && PORTFOLIO_DATA.config) {
+    } else if (typeof PORTFOLIO_DATA !== 'undefined' && PORTFOLIO_DATA.config && typeof PORTFOLIO_DATA.config.soundEnabledByDefault !== 'undefined') {
       this.enabled = Boolean(PORTFOLIO_DATA.config.soundEnabledByDefault);
+    } else {
+      this.enabled = true;
     }
   }
 
@@ -34,7 +36,7 @@ class AudioManager {
       }
     }
     if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
+      this.ctx.resume().catch(() => {});
     }
     return this.ctx;
   }
@@ -44,7 +46,7 @@ class AudioManager {
     localStorage.setItem(this.storageKey, this.enabled ? 'true' : 'false');
     if (this.enabled) {
       this.getAudioContext();
-      this.playChirp();
+      this.playClick();
     }
     return this.enabled;
   }
@@ -60,6 +62,9 @@ class AudioManager {
     try {
       const ctx = this.getAudioContext();
       if (!ctx) return;
+      if (ctx.state === 'suspended') {
+        ctx.resume().catch(() => {});
+      }
 
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();

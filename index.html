@@ -42,6 +42,9 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- EmailJS Browser SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 
 <body>
@@ -65,9 +68,9 @@
       <!-- Desktop Navigation Links -->
       <nav class="desktop-nav" aria-label="Main Navigation">
         <a href="#hero" class="nav-link active">About</a>
+        <a href="#education" class="nav-link">Education</a>
         <a href="#research" class="nav-link">Research</a>
         <a href="#projects" class="nav-link">Projects</a>
-        <a href="#skills" class="nav-link">Skills</a>
         <a href="#certifications" class="nav-link">Certifications</a>
         <a href="#experience" class="nav-link">Experience</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -112,13 +115,12 @@
   <!-- Mobile Dropdown Navigation Drawer -->
   <div class="mobile-menu" id="mobile-menu" aria-label="Mobile Navigation">
     <a href="#hero" class="nav-link">About</a>
-    <a href="#research" class="nav-link">Research Interests</a>
-    <a href="#projects" class="nav-link">Selected Work</a>
-    <a href="#skills" class="nav-link">Technical Skills</a>
+    <a href="#education" class="nav-link">Education</a>
+    <a href="#research" class="nav-link">Research</a>
+    <a href="#projects" class="nav-link">Projects</a>
     <a href="#certifications" class="nav-link">Certifications</a>
-    <a href="#experience" class="nav-link">Experience & Education</a>
-    <a href="#activities" class="nav-link">Beyond the Lab</a>
-    <a href="#contact" class="nav-link">Connect</a>
+    <a href="#experience" class="nav-link">Experience</a>
+    <a href="#contact" class="nav-link">Contact</a>
     <div style="padding-top: 10px; border-top: 1px solid var(--border-subtle); display: flex; gap: 10px;">
       <button class="btn btn-primary view-resume-trigger" style="width: 100%;">
         View Resume PDF
@@ -181,6 +183,22 @@
     </section>
 
     <!-- ======================================================================
+         Education Section
+         ====================================================================== -->
+    <section id="education">
+      <div class="container">
+        <div class="section-header education-header">
+          <h2 class="section-title">Education</h2>
+          <p class="education-text">
+            Currently pursuing B.Tech in Computer Science and Engineering (Artificial Intelligence and Machine Learning)
+            <br>
+            CGPA: 8.22/10, Expected Graduation: 2028
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
          Research Interests Section
          ====================================================================== -->
     <section id="research">
@@ -223,37 +241,12 @@
     </section>
 
     <!-- ======================================================================
-         Technical Skills / Research Toolkit Section
-         ====================================================================== -->
-    <section id="skills">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Technical Competencies</span>
-          <h2 class="section-title">Skills &amp; Research Toolkit</h2>
-          <p class="section-subtitle">
-            Disciplined software engineering and scientific frameworks used for modeling, exploratory data analysis, and
-            high-performance server runtimes.
-          </p>
-        </div>
-
-        <div class="skills-grid" id="skills-grid">
-          <!-- Dynamically populated from portfolio-data.js -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
          Certifications Section
          ====================================================================== -->
     <section id="certifications">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Verified Credentials</span>
+        <div class="section-header certifications-header">
           <h2 class="section-title">Certifications</h2>
-          <p class="section-subtitle">
-            Academic programs, enterprise virtual simulations, and technical proficiencies verified through certified
-            credential authorities.
-          </p>
         </div>
 
         <div class="certs-grid" id="certs-grid">
@@ -263,59 +256,27 @@
     </section>
 
     <!-- ======================================================================
-         Experience & Education Section (Dual Layout)
+         Experience Section (including Beyond Academics)
          ====================================================================== -->
     <section id="experience">
       <div class="container">
-        <div class="exp-edu-grid">
-          <!-- Experience Column -->
-          <div>
-            <div class="section-header" style="margin-bottom: 36px;">
-              <span class="section-tag">Industry Training</span>
-              <h2 class="section-title">Experience</h2>
-              <p class="section-subtitle">
-                Applied engineering and collaborative software delivery.
-              </p>
-            </div>
-
-            <div class="timeline" id="experience-timeline">
-              <!-- Dynamically populated from portfolio-data.js -->
-            </div>
-          </div>
-
-          <!-- Education Column -->
-          <div>
-            <div class="section-header" style="margin-bottom: 36px;">
-              <span class="section-tag">Formal Curriculum</span>
-              <h2 class="section-title">Education</h2>
-              <p class="section-subtitle">
-                Academic foundation in computer science and mathematical principles.
-              </p>
-            </div>
-
-            <div id="education-container">
-              <!-- Dynamically populated from portfolio-data.js -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         Leadership & Activities ("Beyond the Lab")
-         ====================================================================== -->
-    <section id="activities">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Community &amp; Leadership</span>
-          <h2 class="section-title">Beyond the Lab</h2>
-          <p class="section-subtitle">
-            Student leadership, creative multimedia coordination, and campus community engagement.
-          </p>
+        <div class="section-header experience-header">
+          <h2 class="section-title">Experience</h2>
         </div>
 
-        <div class="leadership-grid" id="leadership-grid">
+        <div id="experience-container" class="experience-container">
           <!-- Dynamically populated from portfolio-data.js -->
+        </div>
+
+        <!-- Beyond Academics Subsection -->
+        <div class="beyond-academics-wrapper">
+          <div class="section-header beyond-academics-header">
+            <h2 class="section-title">Beyond Academics</h2>
+          </div>
+
+          <div id="beyond-academics-grid" class="beyond-academics-grid">
+            <!-- Dynamically populated from portfolio-data.js -->
+          </div>
         </div>
       </div>
     </section>
@@ -329,13 +290,9 @@
           <!-- Contact Direct Channels -->
           <div class="contact-info-card">
             <div>
-              <span class="section-tag">Direct Transmission</span>
-              <h2 class="contact-headline" style="margin-top: 8px;">
-                Have a research opportunity in mind?
-              </h2>
+              <h2 class="contact-headline">Send Me a Message</h2>
               <p class="contact-lead" style="margin-top: 14px;">
-                I am actively seeking AI/ML research internships, graduate school research collaborations, and
-                engineering roles at the intersection of computer vision and interpretable models.
+                I’m always open to meaningful opportunities in AI/ML research, computer vision, and explainable AI. Whether it’s a research collaboration, an internship, or an opportunity to build impactful intelligent systems, I’d love to connect, exchange ideas, and explore what we can create together.
               </p>
             </div>
 
@@ -365,10 +322,18 @@
                     <circle cx="4" cy="4" r="2"></circle>
                   </svg>
                 </a>
-                <a href="mailto:tirtha.patil24@vit.edu" class="social-btn" aria-label="Email Tirtha Patil">
+                <a href="mailto:patiltirtha8811@gmail.com" class="social-btn" aria-label="Email Tirtha Patil">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </a>
+                <a href="https://www.instagram.com/ft._.tirthaaaa?cplk=NXo2aXlidTA1cGFm" target="_blank" rel="noopener noreferrer"
+                  class="social-btn" aria-label="Tirtha Patil on Instagram">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                   </svg>
                 </a>
               </div>
@@ -377,11 +342,7 @@
 
           <!-- Functional Contact Form -->
           <div class="contact-form-card">
-            <h3 style="font-size: 1.3rem; margin-bottom: 6px;">Send a Direct Message</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 22px;">
-              Whether inquiring about research assistantships, code collaboration, or project inquiries, feel free to
-              reach out.
-            </p>
+            <h3 style="font-size: 1.3rem; margin-bottom: 22px;">Send a Direct Message</h3>
 
             <form id="contact-form" class="contact-form" novalidate>
               <!-- Spam Honeypot Field -->
@@ -394,25 +355,25 @@
                   <span style="color: var(--color-magenta);">*</span>
                 </label>
                 <input type="text" id="sender-name" name="name" class="form-input"
-                  placeholder="e.g. Dr. Alex Mercer / Sarah Chen" required>
+                  placeholder="Your full name" required>
               </div>
 
               <div class="form-group">
                 <label for="sender-email" class="form-label">
-                  <span>Your Email Address</span>
+                  <span>Your Email</span>
                   <span style="color: var(--color-magenta);">*</span>
                 </label>
                 <input type="email" id="sender-email" name="email" class="form-input"
-                  placeholder="e.g. alex.mercer@university.edu" required>
+                  placeholder="your.email@example.com" required>
               </div>
 
               <div class="form-group">
                 <label for="sender-subject" class="form-label">
-                  <span>Subject / Inquiry Nature</span>
+                  <span>Subject</span>
                   <span style="color: var(--color-magenta);">*</span>
                 </label>
                 <input type="text" id="sender-subject" name="subject" class="form-input"
-                  placeholder="e.g. Research Internship Inquiry / Project Discussion" required>
+                  placeholder="Subject of your message" required>
               </div>
 
               <div class="form-group">
@@ -421,7 +382,7 @@
                   <span style="color: var(--color-magenta);">*</span>
                 </label>
                 <textarea id="sender-message" name="message" class="form-textarea"
-                  placeholder="Detail your project or opportunity here..." required></textarea>
+                  placeholder="Write your message here..." required></textarea>
               </div>
 
               <!-- Live Submission Feedback Box -->
