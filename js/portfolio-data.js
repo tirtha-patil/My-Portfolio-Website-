@@ -324,8 +324,8 @@ const PORTFOLIO_DATA = {
       certificateUrl: "assets/Abhivriddhi-Video Editing Coordinator.pdf"
     },
     {
-      title: "Resin Art Workshop",
-      subtitle: "Organized under the Student Council at VIT, Pune"
+      title: "Conducted Resin Art Workshop",
+      subtitle: "under the Student Council at VIT, Pune"
     }
   ],
 
