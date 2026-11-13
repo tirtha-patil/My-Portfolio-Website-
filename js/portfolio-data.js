@@ -163,7 +163,7 @@ const PORTFOLIO_DATA = {
   // Experience Section
   experience: [
     {
-      role: "Project Intern (Certified)",
+      role: "Python Intern (Certified)",
       organization: "Infosys Virtual Internship 6.0",
       certificateUrl: "assets/Infosys Springboard Internship.pdf",
       githubUrl: "https://github.com/tirtha-patil/Chatterbox-A-Real-time-WebSocket-Chat-Application-Meeting-Invite-Infosys-Internship-Project-",
