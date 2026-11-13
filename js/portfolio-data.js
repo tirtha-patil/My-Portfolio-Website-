@@ -174,6 +174,16 @@ const PORTFOLIO_DATA = {
         "Collaborated with a six-member team to develop, test, and integrate the application. The project was later selected to be showcased to Infosys professionals.",
         "Gained hands-on experience in backend development, teamwork, and version control."
       ]
+    },
+    {
+      role: "AI & Cloud Intern (Ongoing)",
+      organization: "IBM SkillsBuild Internship | Edunet Foundation",
+      highlights: [
+        "Selected for a 4-week internship under the IBM SkillsBuild University Engagements program, facilitated by Edunet Foundation and AICTE.",
+        "Exploring Generative AI, Large Language Models (IBM Granite), Agentic AI, and AI-powered applications.",
+        "Gaining hands-on experience with IBM Cloud, watsonx Orchestrate, Retrieval-Augmented Generation (RAG), and Machine Learning through guided projects.",
+        "Working on practical AI applications, including autonomous agents, crop recommendation systems, and chatbot development."
+      ]
     }
   ],
 
